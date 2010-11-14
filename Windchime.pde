@@ -5,8 +5,21 @@ Config config;
 SCScore score = new SCScore();
 
 void setup() {
-  size(200, 200);
+  size(2, 2);
+  
   loadConfig();
+  loadEvents();
+  mapEvents();
+  scoreEvents();
+  score.play();
+}
+
+void scoreEvents() {
+  Event e;
+  for(int i = 0; i < events.size(); i++) {
+    e = events.get(i);
+    score.addNote(e.tick, e.channel, e.instrument, e.pitch, e.volume, e.duration, 0.8, 64);
+  }
 }
 
 void draw() { }
@@ -14,19 +27,19 @@ void draw() { }
 void loadConfig() {
   config = new Config();
   try {
-    config.pid = Double.parseDouble(getParameter("pid"));
-    config.charge = Double.parseDouble(getParameter("charge"));
-    config.energy = Double.parseDouble(getParameter("energy"));
-    config.x = Double.parseDouble(getParameter("x"));
-    config.y = Double.parseDouble(getParameter("y"));
-    config.z = Double.parseDouble(getParameter("z"));
-    config.r = Double.parseDouble(getParameter("r"));
-    config.t = Double.parseDouble(getParameter("t"));
-    config.px = Double.parseDouble(getParameter("px"));
-    config.py = Double.parseDouble(getParameter("py"));
-    config.pz = Double.parseDouble(getParameter("pz"));
-    config.pt = Double.parseDouble(getParameter("pt"));
-    config.pp = Double.parseDouble(getParameter("pp"));
+    config.pid = getParameter("pid");
+    config.charge = getParameter("charge");
+    config.energy = getParameter("energy");
+    config.x = getParameter("x");
+    config.y = getParameter("y");
+    config.z = getParameter("z");
+    config.r = getParameter("r");
+    config.t = getParameter("t");
+    config.px = getParameter("px");
+    config.py = getParameter("py");
+    config.pz = getParameter("pz");
+    config.pt = getParameter("pt");
+    config.pp = getParameter("pp");
   } catch(Exception e) { }
 }
 

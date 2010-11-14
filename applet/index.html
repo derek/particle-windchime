@@ -1,18 +1,159 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <!-- charset must remain utf-8 to be handled properly by Processing -->
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<html >
 
-    <title>Windchime : Built with Processing</title>
-  </head>
+    <head>
+        <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.2r1/build/reset/reset-min.css">
+        
+        <style>
+            legend{
+                display:none;
+            }
+        </style>
+        
+        <script>
+        
+        /*
+        
+        {
+            "pitch": <input>
+            "pitch_min":  <input>
+            "pitch_max":  <input>
+            "duration": <input>
+            "duration_max": <input>
+            "volume": <input>
+            "value_scaling": <input>
+            "instrument": <input>
+        }
+        
+        */
+        
+        $(document).ready(function() {
+            
+            var inputs = [
+                ['', ''],
+                ['PID', 'pid'], //
+                ['Charge', 'charge'],
+                ['Energy', 'energy'], //Energy
+                ['X', 'x'], //
+                ['Y', 'y'], //
+                ['Z', 'z'], //
+                ['Radius', 'r'],
+                ['Time', 't'], // Time
+                ['Px', 'px'], //
+                ['Py', 'py'], //
+                ['Pz', 'pz'], //
+                ['P-theta', 'pt'], //
+                ['P-phi', 'pp'] //
+            ];
+            
+            var html = [];
+            for(var i=0; i<inputs.length; i++) {
+                html.push('<option value="' + inputs[i][1] + '">' + inputs[i][0] + '</option>');
+            }
+                
+            html = html.join('');
+            /*
+            
+            <applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="200" height="200">
+            <param name="test_string" value="awesome!" />
+            </applet>
+            
+            */
+            $(".inputSelect").each(function(){
+                $(this).html(html);
+            });
+            
+            
+            $("#play").click(function(){
 
-  <body>
-    <div id="content">
-      <div id="Windchime_container">
-        <applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="200" height="200">
-          <param name="test_string" value="awesome!" />
-        </applet>
-    </div>
-  </body>
+                var chime = {
+                    "pitch": $("#pitch").val(),
+                    "duration": $("#duration").val(),
+                    "volume": $("#volume").val(),
+                    "instrument": $("#instrument").val(),
+                }
+                
+                var html = [];
+                html.push('<applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="200" height="200">');
+                html.push('<param name="' + chime.pitch + '" value="pitch" />');
+                html.push('<param name="' + chime.duration + '" value="duration" />');
+                html.push('<param name="' + chime.volume + '" value="volume" />');
+                html.push('<param name="' + chime.instrument + '" value="instrument" />');
+                html.push('</applet>');
+                
+                html = html.join('');
+                
+                $("#crapplet").html(html);
+            });
+            
+            
+        });
+        </script>
+    </head>
+    
+    <body>    
+        
+        <form>
+            <fieldset>
+                <legend>Pitch</legend>
+                <label for="pitch">Pitch</label>
+                <select class="inputSelect" id="pitch"></select>
+            </fieldset>
+        
+        
+        
+        
+        
+            <fieldset>
+                <legend>Duration</legend>
+                <label for="duration">Duration</label>
+                <select class="inputSelect" id="duration"></select>
+            </fieldset>
+        
+        
+        
+        
+        
+            <fieldset>
+                <legend>Volume</legend>
+                <label for="volume">Volume</label>
+                <select class="inputSelect" id="volume"></select>
+            </fieldset>
+        
+        
+        
+        
+        
+            <fieldset>
+                <legend>Instrument</legend>
+                <label for="instrument">Instrument</label>
+                <select class="inputSelect" id="instrument"></select>
+            </fieldset>
+        
+            <input type="button" value="Play" id="play"></input>
+        </form>
+        
+        <div id="crapplet">
+            
+        </div>
+        
+        
+        <script type="text/javascript" charset="utf-8">
+          var mapping = {};
+          function collect_mapping() {
+            $('fieldset').each(function(index, elem) {
+              var key = $(elem).children('legend').html().toLowerCase();
+              var value = $(elem).children('select').children('option:selected').val();
+              mapping[key] = value;
+            });
+          }
+          
+          $('#play').click(function() {
+            collect_mapping();
+          });
+          
+        </script>
+        
+    </body>
+    
 </html>

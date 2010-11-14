@@ -71,14 +71,14 @@
                     "duration": $("#duration").val(),
                     "volume": $("#volume").val(),
                     "instrument": $("#instrument").val(),
-                }     
+                }
                 
                 var html = [];
-                html.push('<applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="200" height="200">');
-                html.push('<param name="pitch" value="' + chime.pitch + '" />');
-                html.push('<param name="duration" value="' + chime.duration + '" />');
-                html.push('<param name="volume" value="' + chime.volume + '" />');
-                html.push('<param name="instrument" value="' + chime.instrument + '" />');
+                html.push('<applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="2" height="2">');
+                html.push('<param name="' + chime.pitch + '" value="pitch" />');
+                html.push('<param name="' + chime.duration + '" value="duration" />');
+                html.push('<param name="' + chime.volume + '" value="volume" />');
+                html.push('<param name="' + chime.instrument + '" value="instrument" />');
                 html.push('</applet>');
                 
                 html = html.join('');
