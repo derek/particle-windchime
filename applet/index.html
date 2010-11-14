@@ -5,8 +5,50 @@
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.2r1/build/reset/reset-min.css">
         
         <style>
+            body{
+                margin:20px;
+            }
+            
+            h1, h2, h3{
+                font-weight:bold;
+                margin:15px 0px 15px 0px;
+            }
+            
+            h1{
+                font-size:30px;
+            }
+            
+            h2{
+                font-size:24px;
+            }
+            
+            h3{
+                font-size:18px;
+            }
+            
             legend{
                 display:none;
+            }
+            
+            label{
+                width:100px;
+                display:block;
+                float:left;
+            }
+            
+            select{
+                clear:right;
+                width:100px;
+            }
+            
+            #play{
+                width:200px;
+                margin-top:15px;
+            }
+            
+            ul li{
+                list-style-type:circle;
+                margin-left:20px;
             }
         </style>
         
@@ -58,7 +100,7 @@
             <param name="test_string" value="awesome!" />
             </applet>
             
-            */
+            */  
             $(".inputSelect").each(function(){
                 $(this).html(html);
             });
@@ -92,6 +134,9 @@
     </head>
     
     <body>    
+        <!-- <img src="http://www.dailygalaxy.com/my_weblog/muon-particle.jpg" style="float:right;" height="200">-->
+        <h1>Windchime</h1>
+        
         
         <form>
             <fieldset>
@@ -137,13 +182,12 @@
             
         </div>
         
-        
         <script type="text/javascript" charset="utf-8">
           var mapping = {};
           function collect_mapping() {
             $('fieldset').each(function(index, elem) {
               var key = $(elem).children('legend').html().toLowerCase();
-              var value = $(elem).children('select').children('option:selected').val();
+              var value = $(elem).children('select').children('option:selected').val(); 
               mapping[key] = value;
             });
           }
@@ -153,6 +197,28 @@
           });
           
         </script>
+        
+        
+        <div style=" clear:both;"></div>
+        <hr />
+        
+        
+        <h2>About</h2>
+        
+        <h3>What is this?</h3>
+        <p>Something awesome</p>
+        
+        <h3>Source Code</h3>
+        <p>Our code can be found at <a href="https://github.com/drgath/windchime">Github</a></p>
+        
+        <h3>Winchime Hackers</h3>
+        <ul>
+            <li>Matt Bellis</li>
+            <li>Derek Gathright (<a href="http://twitter.com/derek">@derek</a>)</li>
+            <li>David Harris (<a href="http://twitter.com/physicsdavid">@physicsdavid</a>)</li>
+            <li>Michael Parrish (<a href="http://twitter.com/michael_parrish">@michael_parrish</a>)</li>
+            <li>Ole Waldman</li>
+        </ul>
         
     </body>
     
