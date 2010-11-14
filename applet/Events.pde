@@ -23,7 +23,13 @@ float duration_min = 1, duration_max = 10;
 
 void mapEvents() {
   HashMap<Integer, Integer> channels = new HashMap<Integer, Integer>();
+  HashMap<Integer, Integer> instruments = new HashMap<Integer, Integer>();
   float from_min, from_max;
+  
+  for(int i = 0; i < 16; i++) {
+    instruments.put(new Integer(i), new Integer((int) random(127)));
+  }
+  
   
   for(Event event : events) {
     if(config.pid != null) {
@@ -40,7 +46,7 @@ void mapEvents() {
         event.volume = map(event.pid, from_min, from_max, 0, 127);
       }
       else if(config.pid.equals("instrument")) {
-        event.instrument = map(event.pid, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.pid, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -68,7 +74,7 @@ void mapEvents() {
         event.volume = map(event.charge, from_min, from_max, 0, 127);
       }
       else if(config.charge.equals("instrument")) {
-        event.instrument = map(event.charge, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.charge, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -96,7 +102,7 @@ void mapEvents() {
         event.volume = map(event.e, from_min, from_max, 0, 127);
       }
       else if(config.energy.equals("instrument")) {
-        event.instrument = map(event.e, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.e, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -125,7 +131,7 @@ void mapEvents() {
         event.volume = map(event.px, from_min, from_max, 0, 127);
       }
       else if(config.px.equals("instrument")) {
-        event.instrument = map(event.px, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.px, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -154,7 +160,7 @@ void mapEvents() {
         event.volume = map(event.py, from_min, from_max, 0, 127);
       }
       else if(config.py.equals("instrument")) {
-        event.instrument = map(event.py, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.py, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -183,7 +189,7 @@ void mapEvents() {
         event.volume = map(event.pz, from_min, from_max, 0, 127);
       }
       else if(config.pz.equals("instrument")) {
-        event.instrument = map(event.pz, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.pz, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -211,7 +217,7 @@ void mapEvents() {
         event.volume = map(event.radius, from_min, from_max, 0, 127);
       }
       else if(config.r.equals("instrument")) {
-        event.instrument = map(event.radius, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.radius, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -240,7 +246,7 @@ void mapEvents() {
         event.volume = map(event.time, from_min, from_max, 0, 127);
       }
       else if(config.t.equals("instrument")) {
-        event.instrument = map(event.time, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.time, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -263,13 +269,13 @@ void mapEvents() {
         event.pitch = map(event.x, from_min, from_max, 0, 127);
       }
       else if(config.x.equals("duration")) {
-        event.duration = map(event.x, from_min, from_max, 0, 127);
+        event.duration = map(event.x, from_min, from_max, duration_min, duration_max);
       }
       else if(config.x.equals("volume")) {
         event.volume = map(event.x, from_min, from_max, 0, 127);
       }
       else if(config.x.equals("instrument")) {
-        event.instrument = map(event.x, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.x, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -297,7 +303,7 @@ void mapEvents() {
         event.volume = map(event.y, from_min, from_max, 0, 127);
       }
       else if(config.y.equals("instrument")) {
-        event.instrument = map(event.y, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.y, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -325,7 +331,7 @@ void mapEvents() {
         event.volume = map(event.z, from_min, from_max, 0, 127);
       }
       else if(config.z.equals("instrument")) {
-        event.instrument = map(event.z, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.z, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -354,7 +360,7 @@ void mapEvents() {
         event.volume = map(event.r, from_min, from_max, 0, 127);
       }
       else if(config.r.equals("instrument")) {
-        event.instrument = map(event.r, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.r, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -383,7 +389,7 @@ void mapEvents() {
         event.volume = map(event.pt, from_min, from_max, 0, 127);
       }
       else if(config.pt.equals("instrument")) {
-        event.instrument = map(event.pt, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.pt, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
@@ -412,7 +418,7 @@ void mapEvents() {
         event.volume = map(event.pp, from_min, from_max, 0, 127);
       }
       else if(config.pp.equals("instrument")) {
-        event.instrument = map(event.pp, from_min, from_max, 0, 127);
+        event.instrument = instruments.get((int) map(event.pp, from_min, from_max, 0, 15));
         
         if(channels.get(event.instrument) != null) {
           event.channel = channels.get(new Integer((int) event.instrument));
