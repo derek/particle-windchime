@@ -56,10 +56,6 @@
             $(".inputSelect").each(function(){
                 $(this).html(html);
             });
-
-            $("#play").click(function(){
-               console.log(this); 
-            });
         });
         </script>
     </head>
@@ -114,6 +110,20 @@
         
             <input type="button" value="Play" id="play"></input>
         </form>
+        
+        <script type="text/javascript" charset="utf-8">
+          $('#play').click(function() {
+            mapping = {};
+            $('fieldset').each(function(index, elem) {
+              var key = $(elem).children('legend').html().toLowerCase();
+              var value = $(elem).children('select').children('option:selected').val();
+              mapping[key] = value;
+            });
+            
+            console.log(mapping);
+          });
+        </script>
+        
     </body>
     
 </html>
