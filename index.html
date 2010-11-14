@@ -1,0 +1,119 @@
+<html >
+
+    <head>
+        <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.2r1/build/reset/reset-min.css">
+        
+        <style>
+            legend{
+                display:none;
+            }
+        </style>
+        
+        <script>
+        
+        /*
+        
+        {
+            "pitch": <input>
+            "pitch_min":  <input>
+            "pitch_max":  <input>
+            "duration": <input>
+            "duration_max": <input>
+            "volume": <input>
+            "value_scaling": <input>
+            "instrument": <input>
+        }
+        
+        */
+        
+        $(document).ready(function() {
+            
+            var inputs = [
+                '',
+                'Type', //
+                'E', //Energy
+                'X', //
+                'Y', //
+                'Z', //
+                'D', // Duration
+                'T', // Time
+                'Px', //
+                'Py', //
+                'Pz', //
+                'P-theta', //
+                'P-phi', //
+            ];
+            
+            var html = [];
+            
+            for(var i=0; i<inputs.length; i++) {
+                html.push("<option value='123'>" + inputs[i] + "</option>");
+            }
+                
+            html = html.join('');
+            
+            $(".inputSelect").each(function(){
+                $(this).html(html);
+            });
+
+            $("#play").click(function(){
+               console.log(this); 
+            });
+        });
+        </script>
+    </head>
+    
+    <body>    
+        
+        <form>
+            <fieldset>
+                <legend>Pitch</legend>
+                <label for="pitch">Pitch</label>
+                <select class="inputSelect"></select>
+            
+                <label>Min</label>
+                <input type="text">
+            
+                <label>Max</label>
+                <input type="text">
+            </fieldset>
+        
+        
+        
+        
+        
+            <fieldset>
+                <legend>Duration</legend>
+                <label for="duration">Duration</label>
+                <select class="inputSelect"></select>
+            
+                <label>Max</label>
+                <input type="text">
+            </fieldset>
+        
+        
+        
+        
+        
+            <fieldset>
+                <legend>Volume</legend>
+                <label for="volume">Volume</label>
+                <select class="inputSelect"></select>
+            </fieldset>
+        
+        
+        
+        
+        
+            <fieldset>
+                <legend>Instrument</legend>
+                <label for="instrument">Instrument</label>
+                <select class="inputSelect"></select>
+            </fieldset>
+        
+            <input type="button" value="Play" id="play"></input>
+        </form>
+    </body>
+    
+</html>
