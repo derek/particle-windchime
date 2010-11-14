@@ -4,6 +4,7 @@ import arb.soundcipher.constants.*;
 Config config;
 SCScore score = new SCScore();
 
+String dataset;
 float score_length = 1000;
 float duration_min = 1, duration_max = 10;
 float tempo = 150;
@@ -45,6 +46,7 @@ void loadConfig() {
     config.pz = getParameter("pz");
     config.pt = getParameter("pt");
     config.pp = getParameter("pp");
-  } catch(Exception e) { }
+    dataset = getParameter("dataset");
+  } catch(Exception e) { println(e.getMessage()); }
 }
 

@@ -1,227 +1,132 @@
-<html >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <!-- charset must remain utf-8 to be handled properly by Processing -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-    <head>
-        <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.2r1/build/reset/reset-min.css">
-        
-        <style>
-            body{
-                margin:20px;
-            }
-            
-            h1, h2, h3{
-                font-weight:bold;
-                margin:15px 0px 15px 0px;
-            }
-            
-            h1{
-                font-size:30px;
-            }
-            
-            h2{
-                font-size:24px;
-            }
-            
-            h3{
-                font-size:18px;
-            }
-            
-            legend{
-                display:none;
-            }
-            
-            label{
-                width:100px;
-                display:block;
-                float:left;
-            }
-            
-            select{
-                clear:right;
-                width:100px;
-            }
-            
-            #play{
-                width:200px;
-                margin-top:15px;
-            }
-            
-            ul li{
-                list-style-type:circle;
-                margin-left:20px;
-            }
-        </style>
-        
-        <script>
-        
-        /*
-        
-        {
-            "pitch": <input>
-            "pitch_min":  <input>
-            "pitch_max":  <input>
-            "duration": <input>
-            "duration_max": <input>
-            "volume": <input>
-            "value_scaling": <input>
-            "instrument": <input>
-        }
-        
-        */
-        
-        $(document).ready(function() {
-            
-            var inputs = [
-                ['', ''],
-                ['PID', 'pid'], //
-                ['Charge', 'charge'],
-                ['Energy', 'energy'], //Energy
-                ['X', 'x'], //
-                ['Y', 'y'], //
-                ['Z', 'z'], //
-                ['Radius', 'r'],
-                ['Time', 't'], // Time
-                ['Px', 'px'], //
-                ['Py', 'py'], //
-                ['Pz', 'pz'], //
-                ['P-theta', 'pt'], //
-                ['P-phi', 'pp'] //
-            ];
-            
-            var html = [];
-            for(var i=0; i<inputs.length; i++) {
-                html.push('<option value="' + inputs[i][1] + '">' + inputs[i][0] + '</option>');
-            }
-                
-            html = html.join('');
-            /*
-            
-            <applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="200" height="200">
-            <param name="test_string" value="awesome!" />
-            </applet>
-            
-            */  
-            $(".inputSelect").each(function(){
-                $(this).html(html);
-            });
-            
-            
-            $("#play").click(function(){
+    <title>Windchime : Built with Processing</title>
 
-                var chime = {
-                    "pitch": $("#pitch").val(),
-                    "duration": $("#duration").val(),
-                    "volume": $("#volume").val(),
-                    "instrument": $("#instrument").val(),
-                }
-                
-                var html = [];
-                html.push('<applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="2" height="2">');
-                html.push('<param name="' + chime.pitch + '" value="pitch" />');
-                html.push('<param name="' + chime.duration + '" value="duration" />');
-                html.push('<param name="' + chime.volume + '" value="volume" />');
-                html.push('<param name="' + chime.instrument + '" value="instrument" />');
-                html.push('</applet>');
-                
-                html = html.join('');
-                
-                $("#crapplet").html(html);
-            });
-            
-            
-        });
-        </script>
-    </head>
-    
-    <body>    
-        <!-- <img src="http://www.dailygalaxy.com/my_weblog/muon-particle.jpg" style="float:right;" height="200">-->
-        <h1>Windchime</h1>
-        
-        
-        <form>
-            <fieldset>
-                <legend>Pitch</legend>
-                <label for="pitch">Pitch</label>
-                <select class="inputSelect" id="pitch"></select>
-            </fieldset>
-        
-        
-        
-        
-        
-            <fieldset>
-                <legend>Duration</legend>
-                <label for="duration">Duration</label>
-                <select class="inputSelect" id="duration"></select>
-            </fieldset>
-        
-        
-        
-        
-        
-            <fieldset>
-                <legend>Volume</legend>
-                <label for="volume">Volume</label>
-                <select class="inputSelect" id="volume"></select>
-            </fieldset>
-        
-        
-        
-        
-        
-            <fieldset>
-                <legend>Instrument</legend>
-                <label for="instrument">Instrument</label>
-                <select class="inputSelect" id="instrument"></select>
-            </fieldset>
-        
-            <input type="button" value="Play" id="play"></input>
-        </form>
-        
-        <div id="crapplet">
-            
-        </div>
-        
-        <script type="text/javascript" charset="utf-8">
-          var mapping = {};
-          function collect_mapping() {
-            $('fieldset').each(function(index, elem) {
-              var key = $(elem).children('legend').html().toLowerCase();
-              var value = $(elem).children('select').children('option:selected').val(); 
-              mapping[key] = value;
-            });
-          }
-          
-          $('#play').click(function() {
-            collect_mapping();
-          });
-          
+    <style type="text/css">
+      /* <![CDATA[ */
+	
+	body {
+  	  margin: 60px 0px 0px 55px;
+	  font-family: verdana, geneva, arial, helvetica, sans-serif; 
+	  font-size: 11px; 
+	  background-color: #ddddcc; 
+	  text-decoration: none; 
+	  font-weight: normal; 
+	  line-height: normal; 
+	}
+		 
+	a          { color: #3399cc; }
+	a:link     { color: #3399cc; text-decoration: underline; }
+	a:visited  { color: #3399cc; text-decoration: underline; }
+	a:active   { color: #3399cc; text-decoration: underline; }
+	a:hover    { color: #3399cc; text-decoration: underline; }
+
+      /* ]]> */
+    </style>    
+  </head>
+
+  <body>
+    <div id="content">
+      <div id="Windchime_container">
+
+	<!-- This version plays nicer with older browsers, 
+	     but requires JavaScript to be enabled. 
+	     http://java.sun.com/javase/6/docs/technotes/guides/jweb/deployment_advice.html -->
+	<script type="text/javascript"
+		src="http://www.java.com/js/deployJava.js"></script>
+	<script type="text/javascript">
+	  /* <![CDATA[ */
+
+	  var attributes = { 
+            code: 'Windchime.class',
+            archive: 'Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar',
+            width: 2, 
+            height: 2,
+            image: 'loading.gif'
+          };
+          var parameters = { };
+          var version = '1.5';
+          deployJava.runApplet(attributes, parameters, version);
+
+          /* ]]> */
         </script>
         
-        
-        <div style=" clear:both;"></div>
-        <hr />
-        
-        
-        <h2>About</h2>
-        
-        <h3>What is this?</h3>
-        <p>Something awesome</p>
-        
-        <h3>Source Code</h3>
-        <p>Our code can be found at <a href="https://github.com/drgath/windchime">Github</a></p>
-        
-        <h3>Winchime Hackers</h3>
-        <ul>
-            <li>Matt Bellis <a href="mailto://mbellis@stanford.edu">mbellis@stanford.edu</a> </li>
-            <li>Derek Gathright (<a href="http://twitter.com/derek">@derek</a>)</li>
-            <li>David Harris (<a href="http://twitter.com/physicsdavid">@physicsdavid</a>)</li>
-            <li>Jeremy Nuger</li>
-            <li>Michael Parrish (<a href="http://twitter.com/michael_parrish">@michael_parrish</a>)</li>
-            <li>Janine Scott (<a href="http://twitter.com/isJaninieLittle">@isJaninieLittle</a>)</li>
-            <li>Ole Waldmann (<a href="http://twitter.com/ole_wa">@ole_wa</a>)</li>
-        </ul>
-        
-    </body>
-    
+	<noscript> <div>
+	  <!--[if !IE]> -->
+	  <object classid="java:Windchime.class" 
+            	  type="application/x-java-applet"
+            	  archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar"
+            	  width="2" height="2"
+            	  standby="Loading Processing software..." >
+            
+	    <param name="archive" value="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" />
+	    
+	    <param name="mayscript" value="true" />
+	    <param name="scriptable" value="true" />
+	    
+	    <param name="image" value="loading.gif" />
+	    <param name="boxmessage" value="Loading Processing software..." />
+	    <param name="boxbgcolor" value="#FFFFFF" />
+	    
+	    <param name="test_string" value="outer" />
+	  <!--<![endif]-->
+
+	    <!-- For more instructions on deployment, 
+		 or to update the CAB file listed here, see:
+		 http://java.sun.com/javase/6/webnotes/family-clsid.html
+		 http://java.sun.com/javase/6/webnotes/install/jre/autodownload.html -->
+	    <object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
+		    codebase="http://java.sun.com/update/1.6.0/jinstall-6u20-windows-i586.cab"
+		    width="2" height="2"
+		    standby="Loading Processing software..."  >
+	      
+	      <param name="code" value="Windchime" />
+	      <param name="archive" value="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" />
+	      
+	      <param name="mayscript" value="true" />
+	      <param name="scriptable" value="true" />
+	      
+	      <param name="image" value="loading.gif" />
+	      <param name="boxmessage" value="Loading Processing software..." />
+	      <param name="boxbgcolor" value="#FFFFFF" />
+	      
+	      <param name="test_string" value="inner" />
+	      
+	      <p>
+		<strong>
+		  This browser does not have a Java Plug-in.
+		  <br />
+		  <a href="http://www.java.com/getjava" title="Download Java Plug-in">
+		    Get the latest Java Plug-in here.
+		  </a>
+		</strong>
+	      </p>
+	      
+	    </object>
+	    
+	  <!--[if !IE]> -->
+	  </object>
+	  <!--<![endif]-->
+
+	</div> </noscript>
+
+      </div>
+      
+      <p>
+	
+      </p>
+      
+      <p>
+	Source code: <a href="Windchime.pde">Windchime</a> <a href="Config.pde">Config</a> <a href="Event.pde">Event</a> <a href="Events.pde">Events</a> 
+      </p>
+      
+      <p>
+	Built with <a href="http://processing.org" title="Processing.org">Processing</a>
+      </p>
+    </div>
+  </body>
 </html>
