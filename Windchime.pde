@@ -7,7 +7,7 @@ SCScore score = new SCScore();
 String dataset, datafile;
 float score_length = 1000;
 float duration_min = 1, duration_max = 10;
-float tempo = 150;
+float tempo = 300;
 
 void setup() {
   size(2, 2);
