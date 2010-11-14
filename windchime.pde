@@ -4,8 +4,13 @@ import arb.soundcipher.constants.*;
 Config config;
 SCScore score = new SCScore();
 
+float score_length = 1000;
+float duration_min = 1, duration_max = 10;
+float tempo = 150;
+
 void setup() {
   size(2, 2);
+  score.tempo(tempo);
   
   loadConfig();
   loadEvents();
