@@ -30,25 +30,25 @@
         $(document).ready(function() {
             
             var inputs = [
-                '',
-                'Type', //
-                'E', //Energy
-                'X', //
-                'Y', //
-                'Z', //
-                'D', // Duration
-                'T', // Time
-                'Px', //
-                'Py', //
-                'Pz', //
-                'P-theta', //
-                'P-phi', //
+                ['', ''],
+                ['Type', 'type'], //
+                ['E', 'e'], //Energy
+                ['X', 'x'], //
+                ['Y', 'y'], //
+                ['Z', 'z'], //
+                ['D', 'd'], // Duration
+                ['T', 't'], // Time
+                ['Px', 'px'], //
+                ['Py', 'py'], //
+                ['Pz', 'pz'], //
+                ['P-theta', 'pt'], //
+                ['P-phi', 'pp'] //
             ];
             
             var html = [];
             
             for(var i=0; i<inputs.length; i++) {
-                html.push("<option value='123'>" + inputs[i] + "</option>");
+                html.push('<option value="' + inputs[i][1] + '">' + inputs[i][0] + "</option>");
             }
                 
             html = html.join('');
@@ -112,16 +112,19 @@
         </form>
         
         <script type="text/javascript" charset="utf-8">
-          $('#play').click(function() {
-            mapping = {};
+          var mapping = {};
+          function collect_mapping() {
             $('fieldset').each(function(index, elem) {
               var key = $(elem).children('legend').html().toLowerCase();
               var value = $(elem).children('select').children('option:selected').val();
               mapping[key] = value;
             });
-            
-            console.log(mapping);
+          }
+          
+          $('#play').click(function() {
+            collect_mapping();
           });
+          
         </script>
         
     </body>
