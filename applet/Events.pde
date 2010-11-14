@@ -433,7 +433,7 @@ void mapEvents() {
 }
 
 void loadEvents() {
-  String[] lines = loadStrings("data/file" + dataset + ".csv");
+  String[] lines = loadStrings("data/" + dataset + datafile + ".csv");
   for(int i = 1; i < lines.length; i++) {
     Event e = new Event();
     
