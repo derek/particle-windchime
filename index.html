@@ -37,7 +37,7 @@
                 ['X', 'x'], //
                 ['Y', 'y'], //
                 ['Z', 'z'], //
-                ['Radius', 'r']
+                ['Radius', 'r'],
                 ['Time', 't'], // Time
                 ['Px', 'px'], //
                 ['Py', 'py'], //
@@ -47,16 +47,46 @@
             ];
             
             var html = [];
-            
             for(var i=0; i<inputs.length; i++) {
-                html.push('<option value="' + inputs[i][1] + '">' + inputs[i][0] + "</option>");
+                html.push('<option value="' + inputs[i][1] + '">' + inputs[i][0] + '</option>');
             }
                 
             html = html.join('');
+            /*
             
+            <applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="200" height="200">
+            <param name="test_string" value="awesome!" />
+            </applet>
+            
+            */
             $(".inputSelect").each(function(){
                 $(this).html(html);
             });
+            
+            
+            $("#play").click(function(){
+
+                var chime = {
+                    "pitch": $("#pitch").val(),
+                    "duration": $("#duration").val(),
+                    "volume": $("#volume").val(),
+                    "instrument": $("#instrument").val(),
+                }     
+                
+                var html = [];
+                html.push('<applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="200" height="200">');
+                html.push('<param name="pitch" value="' + chime.pitch + '" />');
+                html.push('<param name="duration" value="' + chime.duration + '" />');
+                html.push('<param name="volume" value="' + chime.volume + '" />');
+                html.push('<param name="instrument" value="' + chime.instrument + '" />');
+                html.push('</applet>');
+                
+                html = html.join('');
+                
+                $("#crapplet").html(html);
+            });
+            
+            
         });
         </script>
     </head>
@@ -67,13 +97,7 @@
             <fieldset>
                 <legend>Pitch</legend>
                 <label for="pitch">Pitch</label>
-                <select class="inputSelect"></select>
-            
-                <label>Min</label>
-                <input type="text">
-            
-                <label>Max</label>
-                <input type="text">
+                <select class="inputSelect" id="pitch"></select>
             </fieldset>
         
         
@@ -83,10 +107,7 @@
             <fieldset>
                 <legend>Duration</legend>
                 <label for="duration">Duration</label>
-                <select class="inputSelect"></select>
-            
-                <label>Max</label>
-                <input type="text">
+                <select class="inputSelect" id="duration"></select>
             </fieldset>
         
         
@@ -96,7 +117,7 @@
             <fieldset>
                 <legend>Volume</legend>
                 <label for="volume">Volume</label>
-                <select class="inputSelect"></select>
+                <select class="inputSelect" id="volume"></select>
             </fieldset>
         
         
@@ -106,11 +127,16 @@
             <fieldset>
                 <legend>Instrument</legend>
                 <label for="instrument">Instrument</label>
-                <select class="inputSelect"></select>
+                <select class="inputSelect" id="instrument"></select>
             </fieldset>
         
             <input type="button" value="Play" id="play"></input>
         </form>
+        
+        <div id="crapplet">
+            
+        </div>
+        
         
         <script type="text/javascript" charset="utf-8">
           var mapping = {};
