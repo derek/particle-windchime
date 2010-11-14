@@ -13,18 +13,20 @@ void draw() { }
 
 void loadConfig() {
   config = new Config();
-  config.pid = getParameter("pid");
-  config.charge = getParameter("charge");
-  config.energy = getParameter("energy");
-  config.x = getParameter("x");
-  config.y = getParameter("y");
-  config.z = getParameter("z");
-  config.r = getParameter("r");
-  config.t = getParameter("t");
-  config.px = getParameter("px");
-  config.py = getParameter("py");
-  config.pz = getParameter("pz");
-  config.pt = getParameter("pt");
-  config.pp = getParameter("pp");
+  try {
+    config.pid = Double.parseDouble(getParameter("pid"));
+    config.charge = Double.parseDouble(getParameter("charge"));
+    config.energy = Double.parseDouble(getParameter("energy"));
+    config.x = Double.parseDouble(getParameter("x"));
+    config.y = Double.parseDouble(getParameter("y"));
+    config.z = Double.parseDouble(getParameter("z"));
+    config.r = Double.parseDouble(getParameter("r"));
+    config.t = Double.parseDouble(getParameter("t"));
+    config.px = Double.parseDouble(getParameter("px"));
+    config.py = Double.parseDouble(getParameter("py"));
+    config.pz = Double.parseDouble(getParameter("pz"));
+    config.pt = Double.parseDouble(getParameter("pt"));
+    config.pp = Double.parseDouble(getParameter("pp"));
+  } catch(Exception e) { }
 }
 
