@@ -27,7 +27,7 @@ Config config;
 SCScore score = new SCScore();
 
 String dataset, datafile;
-float score_length = 1000;
+float score_length = 600;
 float duration_min = 1, duration_max = 10;
 float tempo = 300;
 
@@ -115,8 +115,27 @@ public void mapEvents() {
   HashMap<Integer, Integer> instruments = new HashMap<Integer, Integer>();
   float from_min, from_max;
   
+  float[] voices = {
+    SCScore.CELLO,
+    SCScore.FRETLESS_BASS,
+    SCScore.WARM_PAD,
+    SCScore.HALO_PAD,
+    SCScore.TUBULAR_BELL,
+    SCScore.TIMPANI,
+    SCScore.MARIMBA,
+    SCScore.GLOCKENSPIEL,
+    SCScore.PIANO,
+    SCScore.ELECTRIC_PIANO,
+    SCScore.HARPSICHORD,
+    SCScore.MUTED_GUITAR,
+    SCScore.BRIGHT_ACOUSTIC,
+    SCScore.OCARINA,
+    SCScore.ALTO_SAX,
+    SCScore.VIOLIN
+  };
+  
   for(int i = 0; i < 16; i++) {
-    instruments.put(new Integer(i), new Integer((int) random(127)));
+    instruments.put(new Integer(i), new Integer((int) voices[i]));
   }
   
   
