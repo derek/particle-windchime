@@ -1,4 +1,25 @@
-For ease of use, this directory is meant to be placed inside the processing sketch directory.  On OS X, this is in ~/Documents/Processing/Windchime.
-In order to get the app running, open processing and select File > Export.  Then run ./deploy from the app directory.  This will copy the images and html into the applet directory -- which is necessary since the applet directory is erased after every export.
+About
+-----
+Particle Windchime is an experiment to generate an audible representation of a particle collision.  This was a "hack" developed at Science Hackday: San Francisco 2010 by a team of physicists and software developers.
 
-To open the app, open ./applet/index.html
+Installing (OSX)
+----------
+1. Install Processing from http://processing.org/
+* Install SoundCipher from http://soundcipher.org/
+* $ cd ~/Documents/Processing/
+* $ git clone git@github.com:drgath/Windchime.git
+* $ cd ./Windchime
+* $ open ./Windchime.pde [Then file > export]
+* $ ./deploy
+* $ open ./applet/index.html
+
+Who
+---
+* Matt Bellis: mbellis@stanford.edu
+* Derek Gathright: (@derek)
+* David Harris: (@physicsdavid)
+* Jeremy Nuger:
+* Michael Parrish: (@michael_parrish)
+* Ali Sajjadi: (@psionn)
+* Janine Scott: (@isJaninieLittle)
+* Ole Waldmann: (@ole_wa)
