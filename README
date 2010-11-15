@@ -1,0 +1,4 @@
+For ease of use, this directory is meant to be placed inside the processing sketch directory.  On OS X, this is in ~/Documents/Processing/Windchime.
+In order to get the app running, open processing and select File > Export.  Then run ./deploy from the app directory.  This will copy the images and html into the applet directory -- which is necessary since the applet directory is erased after every export.
+
+To open the app, open ./applet/index.html

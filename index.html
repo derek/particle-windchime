@@ -1,362 +1,338 @@
-<html >
-
-<head>
-	<link href='http://fonts.googleapis.com/css?family=Philosopher&subset=latin' rel='stylesheet' type='text/css'>
-    <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Philosopher&subset=latin' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.2r1/build/reset/reset-min.css">
-
-    <style>
-    html{
-			background:#4c5664 url('images/chime.gif') top left no-repeat;
-			font-family: 'Philosopher', arial, serif;
-			color:#ecefbc;
-     }
-
-    body{
-        margin:20px auto;
-		padding:20px;
-		width:80%;
-		background:rgba(255, 255, 255, 0.25);
-    }
-
-	a{
-		color:#251852;
-	}
-
-    h1, h2, h3{
-        font-weight:bold;
-        margin:15px 0px 15px 0px;
-    }
-
-    h1{
-        font-size:30px;
-    }
-
-    h2{
-        font-size:20px;
-    }
-
-    h3{
-        font-size:18px;
-    }
-
-    legend{
-        display:none;
-    }
-
-    label{
-        width:100px;
-        display:block;
-        float:left;
-    }
-
-    select{
-        clear:right;
-        width:100px;
-    }
-
-    #play{
-        width:200px;
-        margin-top:15px;
-    }
-
-    ul li{
-        list-style-type:circle;
-        margin-left:20px;
-    }
-
-	table {
-		background:rgba(0, 0, 0, 0.25);
-	}
-	
-    td, th{
-		padding:3px;
-    }
-
-	th {
-		font-weight:bold;
-	}
+    <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     
-    p{
-        line-height:26px;
-        margin:15px;
-    }
-
+    <style type="text/css" media="screen">
+      html {
+        background: #4c5664 url('images/chime.gif') top left no-repeat;
+        font-family: 'Philosopher', arial, serif;
+        color: #ecefbc;
+      }
+      
+      body {
+        margin: 20px auto;
+        padding: 20px;
+        width: 80%;
+        background: rgba(255, 255, 255, 0.25);
+      }
+      
+      a {
+        color: #251852;
+      }
+      
+      h1, h2, h3 {
+        font-weight: bold;
+        margin: 15px 0px 15px 0px;
+      }
+      
+      h1 {
+        font-size: 30px;
+      }
+      
+      h2 {
+        font-size: 20px;
+      }
+      
+      h3 {
+        font-size: 18px;
+      }
+      
+      legend {
+        display: none;
+      }
+      
+      label {
+        width: 100px;
+        display: block;
+        float: left;
+      }
+      
+      select {
+        clear: right;
+        width: 100px;
+      }
+      
+      #play {
+        width: 200px;
+        margin-top: 15px;
+      }
+      
+      ul li {
+        list-style-type: circle;
+        margin-left: 20px;
+      }
+      
+      table {
+        background: rgba(0, 0, 0, 0.25);
+      }
+      
+      td, th {
+        padding: 3px;
+      }
+      
+      th {
+        font-weight: bold;
+      }
+      
+      p {
+        line-height: 26px;
+        margin: 15px;
+      }
     </style>
-
-    <script>
+    
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        var inputs = [
+          ['', ''],
+          ['PID', 'pid'],
+          ['Charge', 'charge'],
+          ['Energy', 'energy'],
+          ['X', 'x'],
+          ['Y', 'y'],
+          ['Z', 'z'],
+          ['Radius', 'r'],
+          ['Time', 't'],
+          ['Px', 'px'],
+          ['Py', 'py'],
+          ['Pz', 'pz'],
+          ['P-theta', 'pt'],
+          ['P-phi', 'pp']
+        ];
         
-        /*
-        
-        {
-            "pitch": <input>
-            "pitch_min":  <input>
-            "pitch_max":  <input>
-            "duration": <input>
-            "duration_max": <input>
-            "volume": <input>
-            "value_scaling": <input>
-            "instrument": <input>
+        var html = [];
+        for(var i = 0; i < inputs.length; i++) {
+          html.push('<option value="' + inputs[i][1] + '">' + inputs[i][0] + '</option>');
         }
         
-        */
+        html = html.join('');
         
-        $(document).ready(function() {
-            
-            var inputs = [
-                ['', ''],
-                ['PID', 'pid'], //
-                ['Charge', 'charge'],
-                ['Energy', 'energy'], //Energy
-                ['X', 'x'], //
-                ['Y', 'y'], //
-                ['Z', 'z'], //
-                ['Radius', 'r'],
-                ['Time', 't'], // Time
-                ['Px', 'px'], //
-                ['Py', 'py'], //
-                ['Pz', 'pz'], //
-                ['P-theta', 'pt'], //
-                ['P-phi', 'pp'] //
-            ];
-            
-            var html = [];
-            for(var i=0; i<inputs.length; i++) {
-                html.push('<option value="' + inputs[i][1] + '">' + inputs[i][0] + '</option>');
-            }
-                
-            html = html.join('');
-            /*
-            
-            <applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="200" height="200">
-            <param name="test_string" value="awesome!" />
-            </applet>
-            
-            */  
-            $(".inputSelect").each(function(){
-                $(this).html(html);
-            });
-            
-            var files = [];
-            for(var i = 1; i < 100; i++) {
-              files.push('<option value="' + i + '">' + i + '</option>');
-            }
-            
-            files = files.join('');
-            $('#datafile').html(files);
-            
-            $("#play").click(function(){
-
-                var chime = {
-                    "pitch": $("#pitch").val(),
-                    "duration": $("#duration").val(),
-                    "volume": $("#volume").val(),
-                    "instrument": $("#instrument").val(),
-                }
-                
-                var html = [];
-                html.push('<applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="2" height="2">');
-                html.push('<param name="dataset" value="' + $("#dataset").val() + '" />');
-                html.push('<param name="datafile" value="' + $("#datafile").val() + '" />');
-                html.push('<param name="' + chime.pitch + '" value="pitch" />');
-                html.push('<param name="' + chime.duration + '" value="duration" />');
-                html.push('<param name="' + chime.volume + '" value="volume" />');
-                html.push('<param name="' + chime.instrument + '" value="instrument" />');
-                html.push('</applet>');
-                
-                html = html.join('');
-                
-                $("#crapplet").html(html);
-            });
-            
-            /*
-             Slideshow
-             */
-            	var totalPics = 11;
-            	for (pic=1;pic<=totalPics;pic++){
-            		$("#slideshow").delay(500).contents().replaceWith("<img src=images/"+pic+".png />");
-            	}
-            
+        $(".inputSelect").each(function(){
+          $(this).html(html);
         });
-        </script>
-    </head>
-    
-    <body>    
-        <!-- <img src="http://www.dailygalaxy.com/my_weblog/muon-particle.jpg" style="float:right;" height="200">-->
-        <h1 style="text-align:center;">Particle Windchime</h1>
-
-        <p>Turn a particle detector into a custom instrument with the fundamental interactions of the universe playing that instrument. Using data from the world's particle colliders, each collision event will play its detector, which can be configured exactly how you want. You define your instrument based on how it reacts to the properties of colliding particles and explore the fundamental laws of the universe through sound. Listen carefully and you might discover the Higgs boson!</p>
         
+        var files = [];
+        for(var i = 1; i < 100; i++) {
+          files.push('<option value="' + i + '">' + i + '</option>');
+        }
         
-        <div style="float:left; margin:20px; ">
-          <form>
-            <fieldset>
-                <legend>Data set</legend>
-                <label for="dataset">Data set</label>
-                <select id="dataset">
-                  <option value="file">General</option>
-                  <option value="bbbar">BBBar</option>
-                  <option value="ccbar">CCBar</option>
-                  <option value="mupmum">MupMum</option>
-                  <option value="tauptaum">TaupTaum</option>
-                </select>
-            </fieldset>
-      
-      
-      
-      
-      
-              <fieldset>
-                  <legend>Data file</legend>
-                  <label for="datafile">Data file</label>
-                  <select id="datafile"></select>
-              </fieldset>
+        files = files.join('');
+        $('#datafile').html(files);
         
-        
-        
-        
-        
-              <fieldset>
-                  <legend>Pitch</legend>
-                  <label for="pitch">Pitch</label>
-                  <select class="inputSelect" id="pitch"></select>
-              </fieldset>
-        
-        
-        
-        
-        
-              <fieldset>
-                  <legend>Duration</legend>
-                  <label for="duration">Duration</label>
-                  <select class="inputSelect" id="duration"></select>
-              </fieldset>
-        
-        
-        
-        
-        
-              <fieldset>
-                  <legend>Volume</legend>
-                  <label for="volume">Volume</label>
-                  <select class="inputSelect" id="volume"></select>
-              </fieldset>
-        
-        
-        
-        
-        
-              <fieldset>
-                  <legend>Instrument</legend>
-                  <label for="instrument">Instrument</label>
-                  <select class="inputSelect" id="instrument"></select>
-              </fieldset>
-        
-              <input type="button" value="Play" id="play"></input>
-          </form>
-          
-          <div id="crapplet"></div>
-        </div>
-            
-        <div style="float:left; margin:20px; ">
-  	    <table border="1" summary="">
-  	        <caption></caption>
-
-  	        <tr><th width="100">Field</th><th width="300">Description</th></tr>
-
-  	        <tr><td>Pitch</td><td>The frequency of the tone</td></tr>
-
-  	        <tr><td>Duration</td><td>The length (time) of the tone</td></tr>
-  	        <tr><td>Volume</td><td>The loundness/softness of the tone</td></tr>
-
-  	        <tr><td>Instrument</td><td>The musical instrument</td></tr>
-
-  	    </table>
-  	    </div>
-
-      <div style="float:left; margin:20px; ">
-      <table border="1" summary="">
-          <caption></caption>
-          <tr><th width="100">Values</th><th width="300">Description</th></tr>
-
-          <tr><td>PID</td><td>Particle ID</td></tr>
-
-          <tr><td>Charge</td><td>Electrical Charge (plus, minus, or zero)</td></tr>
-
-          <tr><td>Energy</td><td>Total energy of particle</td></tr>
-          <tr><td>X</td><td>X-position of the interaction</td></tr>
-
-          <tr><td>Y</td><td>Y-position of the interaction</td></tr>
-
-          <tr><td>Z</td><td>Z-position of the interaction</td></tr>
-          <tr><td>Radius</td><td>Distance from point of collision</td></tr>
-
-          <tr><td>Time</td><td>Clock-time since collision</td></tr>
-
-          <tr><td>Px</td><td>X-direction of movement</td></tr>
-
-          <tr><td>Py</td><td>Y-direction of movement</td></tr>
-          <tr><td>Pz</td><td>Z-direction of movement</td></tr>
-          <tr><td>P-theta</td><td>Angular Direction (Polar)</td></tr>
-
-          <tr><td>P-phi</td><td>Angular Direction (Azimuthal)</td></tr>
-
-      </table>
-  </div>
-        
-        <script type="text/javascript" charset="utf-8">
-          var mapping = {};
-          function collect_mapping() {
-            $('fieldset').each(function(index, elem) {
-              var key = $(elem).children('legend').html().toLowerCase();
-              var value = $(elem).children('select').children('option:selected').val(); 
-              mapping[key] = value;
-            });
+        $("#play").click(function(){
+          var chime = {
+            "pitch": $("#pitch").val(),
+            "duration": $("#duration").val(),
+            "volume": $("#volume").val(),
+            "instrument": $("#instrument").val(),
           }
           
-          $('#play').click(function() {
-            collect_mapping();
-          });
+          var html = [];
+          html.push('<applet classid="java:Windchime.class" archive="Windchime.jar,SoundCipher.jar,SoundCipher.jar,core.jar" width="2" height="2">');
+          html.push('<param name="dataset" value="' + $("#dataset").val() + '" />');
+          html.push('<param name="datafile" value="' + $("#datafile").val() + '" />');
+          html.push('<param name="' + chime.pitch + '" value="pitch" />');
+          html.push('<param name="' + chime.duration + '" value="duration" />');
+          html.push('<param name="' + chime.volume + '" value="volume" />');
+          html.push('<param name="' + chime.instrument + '" value="instrument" />');
+          html.push('</applet>');
+          html = html.join('');
           
-        </script>
+          $("#crapplet").html(html);
+        });
         
+        for(var i = 1; i <= 11; i++) {
+          $("#slideshow").delay(500).contents().replaceWith('<img src="images/' + pic + '.png" />');
+        }
         
-        <div style=" clear:both;"></div>
-        <hr />
-
-        <div>
-            <h3>Source Code</h3>
-
-            <p>Our code can be found at <a href="https://github.com/drgath/windchime">Github</a></p>
-
-            <h3>Windchime Hackers</h3>
-            <ul>
-
-                <li>Matt Bellis <a href="mailto://mbellis@stanford.edu">mbellis@stanford.edu</a> </li>
-
-                <li>Derek Gathright (<a href="http://twitter.com/derek">@derek</a>)</li>
-
-                <li>David Harris (<a href="http://twitter.com/physicsdavid">@physicsdavid</a>)</li>
-
-                <li>Jeremy Nuger</li>
-                <li>Michael Parrish (<a href="http://twitter.com/michael_parrish">@michael_parrish</a>)</li>
-
-                <li>Janine Scott (<a href="http://twitter.com/isJaninieLittle">@isJaninieLittle</a>)</li>
-
-                <li>Ole Waldmann (<a href="http://twitter.com/ole_wa">@ole_wa</a>)</li>
-
-            </ul>
-
-    		<h3>More info</h3>
-    	    <div><!--
-    	        <object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/pnNo8ogfnmE?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/pnNo8ogfnmE?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object> -->
-    	    </div>
-
-    		<div id="slideshow">
-    		</div>
-
-        </div>
-        
-    </body>
+      });
+    </script>
+  </head>
+  <body>
+    <h1 style="text-align:center;">Particle Windchime</h1>
+    <p>Turn a particle detector into a custom instrument with the fundamental interactions of the universe playing that instrument. Using data from the world's particle colliders, each collision event will play its detector, which can be configured exactly how you want. You define your instrument based on how it reacts to the properties of colliding particles and explore the fundamental laws of the universe through sound. Listen carefully and you might discover the Higgs boson!</p>
     
+    <div style="float:left; margin:20px; ">
+      <form>
+        <fieldset>
+          <legend>Data set</legend>
+          <label for="dataset">Data set</label>
+          <select id="dataset">
+            <option value="file">General</option>
+            <option value="bbbar">BBBar</option>
+            <option value="ccbar">CCBar</option>
+            <option value="mupmum">MupMum</option>
+            <option value="tauptaum">TaupTaum</option>
+          </select>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Data file</legend>
+          <label for="datafile">Data file</label>
+          <select id="datafile"></select>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Pitch</legend>
+          <label for="pitch">Pitch</label>
+          <select class="inputSelect" id="pitch"></select>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Duration</legend>
+          <label for="duration">Duration</label>
+          <select class="inputSelect" id="duration"></select>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Volume</legend>
+          <label for="volume">Volume</label>
+          <select class="inputSelect" id="volume"></select>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Instrument</legend>
+          <label for="instrument">Instrument</label>
+          <select class="inputSelect" id="instrument"></select>
+        </fieldset>
+        
+        <input type="button" value="Play" id="play"></input>
+      </form>
+      
+      <div id="crapplet"></div>
+    </div>
+    
+    <div style="float:left; margin:20px;">
+      <table border="1" summary="">
+        <caption></caption>
+        <tr>
+          <th width="100">Field</th>
+          <th width="300">Description</th>
+        </tr>
+        <tr>
+          <td>Pitch</td>
+          <td>The frequency of the tone</td>
+        </tr>
+        <tr>
+          <td>Duration</td>
+          <td>The length (time) of the tone</td>
+        </tr>
+        <tr>
+          <td>Volume</td>
+          <td>The loundness/softness of the tone</td>
+        </tr>
+        <tr>
+          <td>Instrument</td>
+          <td>The musical instrument</td>
+        </tr>
+      </table>
+    </div>
+    
+    <div style="float:left; margin:20px;">
+      <table border="1" summary="">
+        <caption></caption>
+        <tr>
+          <th width="100">Values</th>
+          <th width="300">Description</th>
+        </tr>
+        <tr>
+          <td>PID</td>
+          <td>Particle ID</td>
+        </tr>
+        <tr>
+          <td>Charge</td>
+          <td>Electrical Charge (plus, minus, or zero)</td>
+        </tr>
+        <tr>
+          <td>Energy</td>
+          <td>Total energy of particle</td>
+        </tr>
+        <tr>
+          <td>X</td>
+          <td>X-position of the interaction</td>
+        </tr>
+        <tr>
+          <td>Y</td>
+          <td>Y-position of the interaction</td>
+        </tr>
+        <tr>
+          <td>Z</td>
+          <td>Z-position of the interaction</td>
+        </tr>
+        <tr>
+          <td>Radius</td>
+          <td>Distance from point of collision</td>
+        </tr>
+        <tr>
+          <td>Time</td>
+          <td>Clock-time since collision</td>
+        </tr>
+        <tr>
+          <td>Px</td>
+          <td>X-direction of movement</td>
+        </tr>
+        <tr>
+          <td>Py</td>
+          <td>Y-direction of movement</td>
+        </tr>
+        <tr>
+          <td>Pz</td>
+          <td>Z-direction of movement</td>
+        </tr>
+        <tr>
+          <td>P-theta</td>
+          <td>Angular Direction (Polar)</td>
+        </tr>
+        <tr>
+          <td>P-phi</td>
+          <td>Angular Direction (Azimuthal)</td>
+        </tr>
+      </table>
+    </div>
+    
+    <script type="text/javascript" charset="utf-8">
+      var mapping = {};
+      function collect_mapping() {
+        $('fieldset').each(function(index, elem) {
+          var key = $(elem).children('legend').html().toLowerCase();
+          var value = $(elem).children('select').children('option:selected').val(); 
+          mapping[key] = value;
+        });
+      }
+      
+      $('#play').click(function() {
+        collect_mapping();
+      });
+    </script>
+    
+    <div style="clear:both;"></div>
+    <hr />
+    <div>
+      <h3>Source Code</h3>
+      <p>Our code can be found at <a href="https://github.com/drgath/windchime">Github</a></p>
+      <h3>Windchime Hackers</h3>
+      <ul>
+        <li>Matt Bellis <a href="mailto://mbellis@stanford.edu">mbellis@stanford.edu</a> </li>
+        <li>Derek Gathright (<a href="http://twitter.com/derek">@derek</a>)</li>
+        <li>David Harris (<a href="http://twitter.com/physicsdavid">@physicsdavid</a>)</li>
+        <li>Jeremy Nuger</li>
+        <li>Michael Parrish (<a href="http://twitter.com/michael_parrish">@michael_parrish</a>)</li>
+        <li>Janine Scott (<a href="http://twitter.com/isJaninieLittle">@isJaninieLittle</a>)</li>
+        <li>Ole Waldmann (<a href="http://twitter.com/ole_wa">@ole_wa</a>)</li>
+      </ul>
+      
+      <h3>More info</h3>
+      <div>
+        <object width="640" height="385">
+          <param name="movie" value="http://www.youtube.com/v/pnNo8ogfnmE?fs=1&amp;hl=en_US"></param>
+          <param name="allowFullScreen" value="true"></param>
+          <param name="allowscriptaccess" value="always"></param>
+          <embed src="http://www.youtube.com/v/pnNo8ogfnmE?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed>
+        </object>
+      </div>
+        
+      <div id="slideshow"></div>
+    </div>
+  </body>
 </html>
